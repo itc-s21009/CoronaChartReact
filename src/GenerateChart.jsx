@@ -15,7 +15,7 @@ const createData = (data, year, month, area) => {
 
     // 条件チェック関数
     const yearOK = day => whole_period || parseInt(day.date.slice(0, 4)) === parseInt(year)
-    const monthOK = day => whole_year || parseInt(day.date.slice(5, 7)) === parseInt(month.slice(0, -1))
+    const monthOK = day => whole_period || whole_year || parseInt(day.date.slice(5, 7)) === parseInt(month.slice(0, -1))
     const areaOK = day => whole_country || day.name_jp === area
 
     // 一旦、全期間の記録をまとめる
@@ -30,16 +30,17 @@ const createData = (data, year, month, area) => {
 
         });
     // 連想配列にする
-    const data_new = Object.keys(data_total).map(d => ({ [d]: data_total[d] }))
+    const data_dict = Object.keys(data_total).map(day => ({ [day]: data_total[day] }))
+    // 日毎の感染者増加数をもとめる
+    const data_new = []
+    for (let keys = Object.keys(data_total), i = 1; i < keys.length; i++) {
+        const day = data_total[keys[i]]
+        const day_previous = data_total[keys[i - 1]]
+        const patients = day - day_previous
+        data_new.push({ "date": keys[i], "npatients": patients })
+    }
     console.log(data_new)
-    // data_new.filter(d => )
-    // for (let i = 1; i < data.length; i++) {
-    //     const day = data[i]
-    //     const day_previous = data[i - 1]
-    //     const patients = day.npatients - day_previous.npatients
-    //     data_new.push({ "date": day.date, "npatients": patients })
-    // }
-    return data_total
+    return data_new
 }
 
 const GenerateChart = ({ data, year, month, area }) => {

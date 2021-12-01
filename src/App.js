@@ -23,6 +23,12 @@ const RenderMonthSelect = ({ year, month, setMonth }) =>
       <MonthSelectMenu selectedValue={month} onChange={e => setMonth(e.target.value)} />
     </> : <></>
 
+const GenerateButton = () =>
+  <button>
+    グラフを生成する
+  </button>
+
+
 function App() {
   const [area, setArea] = useState(getAreas()[0])
   const [year, setYear] = useState(getYears()[0])
@@ -41,11 +47,7 @@ function App() {
       <RenderAreaSelect area={area} setArea={setArea} />
       <RenderYearSelect year={year} setYear={setYear} />
       <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
-      <p>
-        <button>
-          グラフを生成する
-        </button>
-      </p>
+      <p><GenerateButton /></p>
       <GenerateChart data={data} year={year} month={month} area={area} />
     </>
   )
