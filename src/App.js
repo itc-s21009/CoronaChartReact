@@ -28,7 +28,8 @@ function App() {
   const [year, setYear] = useState(getYears()[0])
   const [month, setMonth] = useState(getMonths()[0])
   const [data, setData] = useState([])
-  const uri = "http://localhost:3000/data.json"
+  const uri = "./data_all.json"
+  // const uri = "https://opendata.corona.go.jp/api/Covid19JapanAll"
   useEffect(() =>
     window.fetch(uri)
       .then(res => res.json())
@@ -45,7 +46,7 @@ function App() {
           グラフを生成する
         </button>
       </p>
-      <GenerateChart width={800} height={400} data={data} />
+      <GenerateChart data={data} year={year} month={month} area={area} />
     </>
   )
 }
