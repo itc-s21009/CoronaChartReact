@@ -4,6 +4,18 @@ import YearSelectMenu, { getYears } from './YearSelectMenu.jsx'
 import MonthSelectMenu, { getMonths } from './MonthSelectMenu.jsx'
 import GenerateChart from './GenerateChart'
 
+const RenderAreaSelect = ({ area, setArea }) =>
+  <>
+    <p>エリアを選択：{area}</p>
+    <AreaSelectMenu selectedValue={area} onChange={e => setArea(e.target.value)} />
+  </>
+
+const RenderYearSelect = ({ year, setYear }) =>
+  <>
+    <p>年を選択：{year}</p>
+    <YearSelectMenu selectedValue={year} onChange={e => setYear(e.target.value)} />
+  </>
+
 const RenderMonthSelect = ({ year, month, setMonth }) =>
   year !== getYears()[0] ?
     <>
@@ -25,10 +37,8 @@ function App() {
   )
   return (
     <>
-      <p>エリアを選択：{area}</p>
-      <AreaSelectMenu selectedValue={area} onChange={e => setArea(e.target.value)} />
-      <p>年を選択：{year}</p>
-      <YearSelectMenu selectedValue={year} onChange={e => setYear(e.target.value)} />
+      <RenderAreaSelect area={area} setArea={setArea} />
+      <RenderYearSelect year={year} setYear={setYear} />
       <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
       <p>
         <button>
