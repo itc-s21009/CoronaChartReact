@@ -35,9 +35,9 @@ const createData = (data, year, month, area) => {
         const day = data_total[keys[i]]
         const day_previous = data_total[keys[i - 1]]
         const patients = day - day_previous
-        data_new.push({ "date": keys[i], "npatients": patients })
+        // 0以下になるデータがあった
+        data_new.push({ "date": keys[i], "npatients": patients < 0 ? 0 : patients })
     }
-    console.log(data_new)
     return data_new
 }
 

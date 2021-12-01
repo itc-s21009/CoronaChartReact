@@ -23,11 +23,6 @@ const RenderMonthSelect = ({ year, month, setMonth }) =>
       <MonthSelectMenu selectedValue={month} onChange={e => setMonth(e.target.value)} />
     </> : <></>
 
-const GenerateButton = ({ handleClick }) =>
-  <button onClick={handleClick}>
-    グラフを生成する
-  </button>
-
 function App() {
   const [area, setArea] = useState(getAreas()[0])
   const [year, setYear] = useState(getYears()[0])
@@ -35,23 +30,17 @@ function App() {
   const [data, setData] = useState([])
   const uri = "./data_all.json"
   // const uri = "https://opendata.corona.go.jp/api/Covid19JapanAll"
-  // useEffect(() =>
-  //   window.fetch(uri)
-  //     .then(res => res.json())
-  //     .then(json => setData(json.itemList.reverse()))
-  //   , []
-  // )
-  const handleClick = () => {
+  const getData = () => {
     window.fetch(uri)
       .then(res => res.json())
       .then(json => setData(json.itemList.reverse()))
   }
+  useEffect(getData, [])
   return (
     <>
       <RenderAreaSelect area={area} setArea={setArea} />
       <RenderYearSelect year={year} setYear={setYear} />
       <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
-      <p><GenerateButton handleClick={handleClick} /></p>
       <GenerateChart data={data} year={year} month={month} area={area} />
     </>
   )
