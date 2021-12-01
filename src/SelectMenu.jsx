@@ -7,8 +7,8 @@ const Options = ({ values }) =>
         </option>
     )
 
-const SelectMenu = ({ values, onChange }) =>
-    <select onChange={onChange}>
+const SelectMenu = ({ selectedValue, values, onChange }) =>
+    <select value={selectedValue === undefined ? values[0] : selectedValue} onChange={onChange}>
         <Options values={values} />
     </select >
 

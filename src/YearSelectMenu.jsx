@@ -2,12 +2,13 @@ import React from 'react'
 import SelectMenu from './SelectMenu'
 
 const years = [
-    "2020",
-    "2021"
+    "全期間",
+    "2020年",
+    "2021年"
 ]
 
-const YearSelectMenu = ({ onChange }) => {
-    return <SelectMenu values={years} onChange={onChange} />
+const YearSelectMenu = ({ selectedValue, onChange }) => {
+    return <SelectMenu selectedValue={selectedValue} values={years} onChange={onChange} />
 }
 
 export const getYears = () => years

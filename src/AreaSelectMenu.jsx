@@ -2,6 +2,7 @@ import React from 'react'
 import SelectMenu from './SelectMenu'
 
 const areas = [
+    "全国",
     "北海道",
     "青森県",
     "岩手県",
@@ -51,8 +52,8 @@ const areas = [
     "沖縄県",
 ]
 
-const AreaSelectMenu = ({ onChange }) => {
-    return <SelectMenu values={areas} onChange={onChange} />
+const AreaSelectMenu = ({ selectedValue, onChange }) => {
+    return <SelectMenu selectedValue={selectedValue} values={areas} onChange={onChange} />
 }
 
 export const getAreas = () => areas
