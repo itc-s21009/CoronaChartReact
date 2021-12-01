@@ -1,7 +1,7 @@
 import React from 'react'
-import AreaSelectMenu, { getAreas } from './AreaSelectMenu'
-import YearSelectMenu, { getYears } from './YearSelectMenu.jsx'
-import MonthSelectMenu, { getMonths } from './MonthSelectMenu.jsx'
+import { getAreas } from './AreaSelectMenu'
+import { getYears } from './YearSelectMenu.jsx'
+import { getMonths } from './MonthSelectMenu.jsx'
 import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts'
 
 // 日ごとの感染者増加数をまとめる
@@ -29,8 +29,6 @@ const createData = (data, year, month, area) => {
                 patients_total : data_total[date] + patients_total
 
         });
-    // 連想配列にする
-    const data_dict = Object.keys(data_total).map(day => ({ [day]: data_total[day] }))
     // 日毎の感染者増加数をもとめる
     const data_new = []
     for (let keys = Object.keys(data_total), i = 1; i < keys.length; i++) {
