@@ -14,21 +14,21 @@ const createData = (data, year, month, area) => {
     const whole_country = area === getAreas()[0]
 
     // 条件チェック関数
-    const yearOK = s => whole_period || s.slice(0, 4) === year
-    const monthOK = s => whole_year || parseInt(s.slice(5, 7)) === parseInt(month.slice(0, -1))
-    const areaOK = s => whole_country || s === area
+    const yearOK = day => whole_period || parseInt(day.date.slice(0, 4)) === parseInt(year)
+    const monthOK = day => whole_year || parseInt(day.date.slice(5, 7)) === parseInt(month.slice(0, -1))
+    const areaOK = day => whole_country || day.name_jp === area
 
     // 一旦、全期間の記録をまとめる
     const data_total = {}
-    data.forEach(day => {
-        // 県が条件にあっているか
-        if (areaOK(day.name_jp)) {
+    // 条件でフィルターして、データを入れる
+    data.filter(day => yearOK(day) && monthOK(day) && areaOK(day))
+        .forEach(day => {
             const patients_total = parseInt(day.npatients)
             const date = day.date
             data_total[date] = data_total[date] === undefined ?
                 patients_total : data_total[date] + patients_total
-        }
-    });
+
+        });
     // 連想配列にする
     const data_new = Object.keys(data_total).map(d => ({ [d]: data_total[d] }))
     console.log(data_new)
