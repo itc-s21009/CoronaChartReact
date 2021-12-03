@@ -3,25 +3,26 @@ import AreaSelectMenu, { getAreas } from './AreaSelectMenu'
 import YearSelectMenu, { getYears } from './YearSelectMenu.jsx'
 import MonthSelectMenu, { getMonths } from './MonthSelectMenu.jsx'
 import GenerateChart from './GenerateChart'
+import './App.css'
 
 const RenderAreaSelect = ({ area, setArea }) =>
-  <>
-    <p>エリアを選択：{area}</p>
+  <div class="select-content">
+    <p>エリアを選択：<br /><span class="selected-value">{area}</span></p>
     <AreaSelectMenu selectedValue={area} onChange={e => setArea(e.target.value)} />
-  </>
+  </div>
 
 const RenderYearSelect = ({ year, setYear }) =>
-  <>
-    <p>年を選択：{year}</p>
+  <div class="select-content">
+    <p>年を選択：<br /><span class="selected-value">{year}</span></p>
     <YearSelectMenu selectedValue={year} onChange={e => setYear(e.target.value)} />
-  </>
+  </div>
 
 const RenderMonthSelect = ({ year, month, setMonth }) =>
   year !== getYears()[0] ?
-    <>
-      <p>月を選択：{month}</p>
+    <div class="select-content">
+      <p>月を選択：<br /><span class="selected-value">{month}</span></p>
       <MonthSelectMenu selectedValue={month} onChange={e => setMonth(e.target.value)} />
-    </> : <></>
+    </div> : <></>
 
 function App() {
   const [area, setArea] = useState(getAreas()[0])
@@ -38,10 +39,12 @@ function App() {
   useEffect(getData, [])
   return (
     <>
-      <RenderAreaSelect area={area} setArea={setArea} />
-      <RenderYearSelect year={year} setYear={setYear} />
-      <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
       <GenerateChart data={data} year={year} month={month} area={area} />
+      <div class="select">
+        <RenderAreaSelect area={area} setArea={setArea} />
+        <RenderYearSelect year={year} setYear={setYear} />
+        <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
+      </div>
     </>
   )
 }
