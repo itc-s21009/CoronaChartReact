@@ -1,16 +1,25 @@
 @charset "utf8";
 body {
-  background: linear-gradient(0, #8181ff, white 60%);
-}
+  margin: 0;
+background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 75%, rgba(154,0,70,1) 100%);}
 /* .chart {
   background: white;
 } */
 
 .select {
+  font-family: serif;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: -2px -2px #000;
+  border-top: solid 5px #850000;
   display: flex;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 20px;
+  position: fixed;
+  background: #ed564c;
+  bottom: 0;
 }
 
 .select > .select-content {
@@ -19,4 +28,10 @@ body {
 
 .selected-value {
   font-size: 20px;
+}
+
+.chart {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
 }

@@ -38,14 +38,14 @@ function App() {
   }
   useEffect(getData, [])
   return (
-    <>
+    <div class="wrapper">
       <GenerateChart data={data} year={year} month={month} area={area} />
       <div class="select">
         <RenderAreaSelect area={area} setArea={setArea} />
         <RenderYearSelect year={year} setYear={setYear} />
         <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
       </div>
-    </>
+    </div>
   )
 }
 

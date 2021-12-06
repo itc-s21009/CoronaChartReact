@@ -37,7 +37,11 @@ const createData = (data, year, month, area) => {
         const patients = day - day_previous
         // 0以下になるデータがあった
         // 例：福島県の2021年4月6日
-        data_new.push({ "date": keys[i], "npatients": patients < 0 ? 0 : patients })
+        data_new.push({
+            "date": keys[i].replace('-', '年').replace('-', '月') + "日",
+            "感染者数":
+                patients < 0 ? 0 : patients
+        })
     }
     return data_new
 }
@@ -45,8 +49,7 @@ const createData = (data, year, month, area) => {
 const GenerateChart = ({ data, year, month, area }) => {
     return (
         <div class="chart">
-            <AreaChart width={900} height={400} data={createData(data, year, month, area)}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart width={800} height={390} data={createData(data, year, month, area)}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -61,7 +64,7 @@ const GenerateChart = ({ data, year, month, area }) => {
                 <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
-                <Area type="linear" dataKey="npatients" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                <Area type="linear" dataKey="感染者数" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
             </AreaChart>
         </div>
     );
