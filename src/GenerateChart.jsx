@@ -49,7 +49,7 @@ const createData = (data, year, month, area) => {
 const GenerateChart = ({ data, year, month, area }) => {
     return (
         <div class="chart">
-            <AreaChart width={800} height={390} data={createData(data, year, month, area)}>
+            <AreaChart width={800} height={350} data={createData(data, year, month, area)}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
