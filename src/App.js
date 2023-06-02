@@ -6,21 +6,21 @@ import GenerateChart from './GenerateChart'
 import './App.css'
 
 const RenderAreaSelect = ({ area, setArea }) =>
-  <div class="select-content">
-    <p>エリアを選択：<br /><span class="selected-value">{area}</span></p>
+  <div className="select-content">
+    <p>エリアを選択：<br /><span className="selected-value">{area}</span></p>
     <AreaSelectMenu selectedValue={area} onChange={e => setArea(e.target.value)} />
   </div>
 
 const RenderYearSelect = ({ year, setYear }) =>
-  <div class="select-content">
-    <p>年を選択：<br /><span class="selected-value">{year}</span></p>
+  <div className="select-content">
+    <p>年を選択：<br /><span className="selected-value">{year}</span></p>
     <YearSelectMenu selectedValue={year} onChange={e => setYear(e.target.value)} />
   </div>
 
 const RenderMonthSelect = ({ year, month, setMonth }) =>
   year !== getYears()[0] ?
-    <div class="select-content">
-      <p>月を選択：<br /><span class="selected-value">{month}</span></p>
+    <div className="select-content">
+      <p>月を選択：<br /><span className="selected-value">{month}</span></p>
       <MonthSelectMenu selectedValue={month} onChange={e => setMonth(e.target.value)} />
     </div> : <></>
 
@@ -38,9 +38,12 @@ function App() {
   }
   useEffect(getData, [])
   return (
-    <div class="wrapper">
-      <GenerateChart data={data} year={year} month={month} area={area} />
-      <div class="select">
+    <div className="row justify-content-center mt-5">
+      <div className="col col-md-5">
+        <GenerateChart data={data} year={year} month={month} area={area} />
+        <p className="text-end">データ提供: <a href="https://corona.go.jp/dashboard/">内閣官房新型コロナウイルス等感染症対策推進室</a></p>
+      </div>
+      <div className="select">
         <RenderAreaSelect area={area} setArea={setArea} />
         <RenderYearSelect year={year} setYear={setYear} />
         <RenderMonthSelect year={year} month={month} setMonth={setMonth} />
